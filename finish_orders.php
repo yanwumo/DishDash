@@ -6,7 +6,8 @@ $ids = $_GET['id'];
 $db = new PDO('sqlite:data.sqlite');
 
 if (!is_array($ids)) {
-    $ids = array($ids);
+    echo "error";
+    exit();
 }
 
 foreach ($ids as $id) {
@@ -19,6 +20,11 @@ foreach ($ids as $id) {
         exit();
     }
     $table = $row['table_id'];
+}
+
+if (!isset($table)) {
+    echo "error";
+    exit();
 }
 
 $stmt = $db->prepare("SELECT distance FROM tables WHERE id = :id");
