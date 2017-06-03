@@ -5,6 +5,11 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $ids = $_GET['id'];
 $db = new PDO('sqlite:data.sqlite');
 
+if (!is_array($ids)) {
+    echo "error";
+    exit();
+}
+
 foreach ($ids as $id) {
     $stmt = $db->prepare("SELECT table_id FROM orders WHERE id = :id");
     $stmt->bindParam(":id", $id);
@@ -15,6 +20,11 @@ foreach ($ids as $id) {
         exit();
     }
     $table = $row['table_id'];
+}
+
+if (!isset($table)) {
+    echo "error";
+    exit();
 }
 
 $stmt = $db->prepare("SELECT distance FROM tables WHERE id = :id");
