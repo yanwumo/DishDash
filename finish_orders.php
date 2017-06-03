@@ -5,6 +5,10 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $ids = $_GET['id'];
 $db = new PDO('sqlite:data.sqlite');
 
+if (!isarray($ids)) {
+    $ids = array($ids);
+}
+
 foreach ($ids as $id) {
     $stmt = $db->prepare("SELECT table_id FROM orders WHERE id = :id");
     $stmt->bindParam(":id", $id);
