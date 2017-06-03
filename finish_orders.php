@@ -5,7 +5,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $ids = $_GET['id'];
 $db = new PDO('sqlite:data.sqlite');
 
-if (!isarray($ids)) {
+if (!is_array($ids)) {
     $ids = array($ids);
 }
 
